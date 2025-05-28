@@ -1,0 +1,33 @@
+{
+  "skills": [
+    "JavaScript", "Python", "Java", "C++", "C#", "Go", "Rust", "SQL",
+    "HTML", "CSS", "TypeScript", "React", "Node.js", "Express.js",
+    "MongoDB", "PostgreSQL", "Firebase", "Next.js", "Angular", "Vue.js",
+    "Docker", "Kubernetes", "AWS", "Azure", "GCP", "Git", "CI/CD",
+    "Machine Learning", "Deep Learning", "NLP", "TensorFlow", "PyTorch",
+    "Data Science", "Data Analysis", "Power BI", "Tableau", "ETL",
+    "Cybersecurity", "Blockchain", "Solidity", "Web3", "DevOps",
+
+    "Communication", "Leadership", "Problem Solving", "Time Management",
+    "Adaptability", "Teamwork", "Critical Thinking", "Conflict Resolution",
+    "Creativity", "Emotional Intelligence", "Decision Making", "Public Speaking",
+
+    "Project Management", "Agile", "Scrum", "Kanban", "Business Analysis",
+    "Strategic Planning", "Budgeting", "Market Research", "Customer Service",
+    "Sales", "Negotiation", "Product Management",
+
+    "SEO", "SEM", "Social Media Marketing", "Email Marketing",
+    "Content Writing", "Copywriting", "Google Analytics", "Branding",
+    "Influencer Marketing", "Affiliate Marketing",
+
+    "Graphic Design", "UI/UX Design", "Figma", "Adobe Photoshop",
+    "Illustrator", "Premiere Pro", "After Effects", "3D Modeling",
+    "Video Editing", "Animation", "Prototyping", "Wireframing",
+
+    "Financial Analysis", "Bookkeeping", "Taxation", "Excel", "QuickBooks",
+    "Investment Analysis", "Auditing", "Risk Management",
+
+    "Technical Writing", "Creative Writing", "Blogging", "Editing",
+    "Proofreading", "Script Writing", "Journalism", "Storytelling"
+  ]
+}
