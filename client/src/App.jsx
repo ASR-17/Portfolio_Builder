@@ -30,27 +30,43 @@ function App() {
           <Route
             path="/dashboard"
             element={
-              <ProtectedRoute>
+                <ProtectedRoute>
                 <Dashboard />
-              </ProtectedRoute>
+                </ProtectedRoute>
             }
           />
-          {/* <Route
+          <Route
             path="/templates"
             element={
-              <ProtectedRoute>
-                <Templates />
-              </ProtectedRoute>
+                <ProtectedRoute>
+                  <Templates />
+                  </ProtectedRoute>
             }
           />
           <Route
             path="/portfolio/:id"
             element={
+                <ProtectedRoute>
+                  <PublicPortfolio />
+                </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/templates/modern"
+            element={
+                <ProtectedRoute>
+                  <ModernTemplate />
+                </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/templates/minimal"
+            element={
               <ProtectedRoute>
-                <PublicPortfolio />
+              <ClassicTemplate />
               </ProtectedRoute>
             }
-          /> */}
+          />
         </Routes>
       </Router>
     </AuthProvider>

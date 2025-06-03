@@ -12,8 +12,8 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
-      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Dashboard</h2>
+    <div className="min-h-screen bg-gray-100 py-10 px-4 mt-10">
+      <h2 className="text-3xl font-bold text-center mb-8 text-green-500 font-sans">Dashboard</h2>
 
       {/* Conditional rendering: either Form or Preview */}
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-md">

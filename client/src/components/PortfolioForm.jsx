@@ -53,7 +53,7 @@ export default function PortfolioForm({ onSubmit }) {
   const commonInputStyle = "bg-white text-purple-700";
 
   return (
-    <Card className="max-w-3xl mx-auto mt-10 p-6 rounded-2xl shadow-md bg-gradient-to-br from-purple-700 to-green-800 text-white">
+    <Card className="max-w-3xl mx-auto mt-8 p-6 rounded-2xl shadow-md bg-gradient-to-br from-purple-700 to-green-800 text-white">
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           {[
