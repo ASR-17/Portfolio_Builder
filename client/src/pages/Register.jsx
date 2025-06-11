@@ -3,12 +3,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../context/userContext"; 
-
+import { useAuth } from "@/context/AuthContext";
 
 export default function Register() {
   const navigate = useNavigate();
-  const { login } = useUser(); // ✅ Correct position for hook usage
+  const { setUser, setIsAuthenticated } = useAuth();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -32,7 +31,7 @@ export default function Register() {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/auth/register", {
+      const res = await axios.post("http://localhost:5000/api/auth/register", {
         firstName: formData.firstName,
         middleName: formData.middleName,
         lastName: formData.lastName,
@@ -41,24 +40,16 @@ export default function Register() {
         password: formData.password,
       });
 
-      alert("Registration successful. Confirmation email sent!");
+      const { token, user } = res.data;
 
-      login(formData.email); // ✅ Set user context
+      localStorage.setItem("token", token);
+      setUser(user);
+      setIsAuthenticated(true);
 
-      setFormData({
-        firstName: "",
-        middleName: "",
-        lastName: "",
-        email: "",
-        username: "",
-        password: "",
-        confirmPassword: "",
-      });
-
-      navigate("/login"); // ✅ Redirect to login page
+      navigate("/dashboard");
     } catch (error) {
-      console.error(error);
-      alert("Registration failed.");
+      console.error("❌ Registration error:", error.response?.data?.message || error.message);
+      alert(error.response?.data?.message || "Registration successful.");
     }
   };
 
@@ -69,7 +60,6 @@ export default function Register() {
           Create Your Account
         </h1>
         <form onSubmit={handleRegister} className="space-y-6">
-          {/* Name fields */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="block font-medium mb-1">First Name<span className="text-red-500">*</span></label>
@@ -85,19 +75,16 @@ export default function Register() {
             </div>
           </div>
 
-          {/* Email */}
           <div>
             <label className="block font-medium mb-1">Gmail<span className="text-red-500">*</span></label>
             <Input name="email" type="email" placeholder="Enter Gmail address" value={formData.email} onChange={handleChange} required />
           </div>
 
-          {/* Username */}
           <div>
             <label className="block font-medium mb-1">Username<span className="text-red-500">*</span></label>
             <Input name="username" placeholder="Choose a username" value={formData.username} onChange={handleChange} required />
           </div>
 
-          {/* Passwords */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block font-medium mb-1">Password<span className="text-red-500">*</span></label>
@@ -109,7 +96,6 @@ export default function Register() {
             </div>
           </div>
 
-          {/* Button */}
           <Button type="submit" className="w-full text-white font-semibold text-lg">
             Register
           </Button>

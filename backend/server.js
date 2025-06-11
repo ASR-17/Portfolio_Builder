@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import authRoutes from "./routes/authRoutes.js";
+// import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 
@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGO_URI, {
   .catch((err) => console.error(err));
 
 
-
+import authRoutes from "./routes/authRoutes.js";
 app.use("/api/auth", authRoutes);
 
 

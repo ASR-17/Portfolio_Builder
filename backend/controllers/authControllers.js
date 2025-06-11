@@ -26,9 +26,21 @@ export const registerUser = async (req, res) => {
 
     await newUser.save();
 
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
     console.log(`📧 Confirmation email would be sent to ${email}`);
 
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({
+      message: "User registered successfully",
+      token,
+      user: {
+        id: newUser._id,
+        email: newUser.email,
+        username: newUser.username,
+      },
+    });
   } catch (err) {
     console.error("❌ Register error:", err.message);
     res.status(500).json({ message: "Server error" });
@@ -70,3 +82,9 @@ export const loginUser = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+// ✅ GET LOGGED-IN USER
+export const getMe = (req, res) => {
+  res.status(200).json({ user: req.user });
+};
+

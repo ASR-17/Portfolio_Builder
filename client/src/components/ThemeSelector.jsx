@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import ThemeSelector from "./ThemeSelector";
+import { useNavigate } from "react-router-dom";
 import ModernTemplate from "./templates/ModernTemplate";
 import ClassicTemplate from "./templates/ClassicTemplate";
 import { Button } from "@/components/ui/button";
+import PublicPortfolio from './../pages/PublicPortfolio';
 
 const templates = [
   {
@@ -17,14 +18,29 @@ const templates = [
 
 const ThemeSelection = ({ onSubmitTheme }) => {
   const [selectedTheme, setSelectedTheme] = useState("");
+  const navigate = useNavigate();
 
   const handleSelect = (themeName) => {
     setSelectedTheme(themeName);
   };
 
   const handleSubmit = () => {
-    if (selectedTheme) {
-      onSubmitTheme(selectedTheme); // Pass selected theme name to parent
+    if (!selectedTheme) return;
+
+    // Save theme to localStorage
+    localStorage.setItem("selectedTheme", selectedTheme);
+
+    // Notify parent (if passed)
+    if (onSubmitTheme) {
+      onSubmitTheme(selectedTheme);
+    }
+
+    // Navigate based on resume data
+    const resumeData = localStorage.getItem("resumeData");
+    if (resumeData) {
+      navigate("/portfolio/:id");
+    } else {
+      navigate("/dashboard");
     }
   };
 
@@ -48,7 +64,9 @@ const ThemeSelection = ({ onSubmitTheme }) => {
             <h3 className="text-xl font-semibold capitalize text-center">
               {tpl.name} Theme
             </h3>
-            <div className="bg-white p-4 rounded-xl  h-[60vh] overflow-y-auto">{tpl.component}</div>
+            <div className="bg-white p-4 rounded-xl h-[60vh] overflow-y-auto">
+              {tpl.component}
+            </div>
           </div>
         ))}
       </div>

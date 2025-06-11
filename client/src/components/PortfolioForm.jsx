@@ -39,6 +39,7 @@ export default function PortfolioForm({ onSubmit }) {
   const handleReset = () => {
     setFormDataLocal(initialFormData);
     setSelectedSkills([]);
+    localStorage.removeItem("portfolioData");
   };
 
   const handleSubmit = (e) => {
@@ -47,7 +48,12 @@ export default function PortfolioForm({ onSubmit }) {
       ...formData,
       skills: selectedSkills,
     };
-    if (onSubmit) onSubmit(completeData); // Call parent handler
+    localStorage.setItem("portfolioData", JSON.stringify(completeData));
+
+    // ✅ Inform parent component (Dashboard) to show preview
+    if (typeof onSubmit === "function") {
+      onSubmit();
+    }
   };
 
   const commonInputStyle = "bg-white text-purple-700";
@@ -103,7 +109,6 @@ export default function PortfolioForm({ onSubmit }) {
             </div>
           ))}
 
-          {/* Bio Input */}
           <div>
             <label className="text-lg font-medium">
               Bio / Summary<span className="text-red-500">*</span>
@@ -119,7 +124,6 @@ export default function PortfolioForm({ onSubmit }) {
             />
           </div>
 
-          {/* Skills Input */}
           <div>
             <SkillsInput
               selectedSkills={selectedSkills}
@@ -127,7 +131,6 @@ export default function PortfolioForm({ onSubmit }) {
             />
           </div>
 
-          {/* Projects Section */}
           <div>
             <label className="text-lg font-medium">Projects</label>
             {formData.projects.map((project, index) => (
@@ -152,7 +155,6 @@ export default function PortfolioForm({ onSubmit }) {
             </Button>
           </div>
 
-          {/* Buttons */}
           <div className="flex gap-4">
             <Button type="submit">Submit</Button>
             <Button type="button" onClick={handleReset}>

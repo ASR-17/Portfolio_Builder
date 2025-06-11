@@ -1,6 +1,6 @@
 import { useState } from "react";
 import skillsData from "./data/skills.json";
-import { gradient } from './../../node_modules/tailwindcss/src/util/dataTypes';
+// import { gradient } from './../../node_modules/tailwindcss/src/util/dataTypes';
 
 export default function SkillsInput({ selectedSkills, setSelectedSkills }) {
   const [query, setQuery] = useState("");

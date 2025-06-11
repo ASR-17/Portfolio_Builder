@@ -13,62 +13,77 @@ import Templates from './pages/Templates';
 import PublicPortfolio from './pages/PublicPortfolio';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
+import { UserProvider } from './context/userContext';
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        {/* Navbar outside Routes so it shows on every page */}
-        <Navbar />
+      <UserProvider>
+        <Router>
+          <Navbar />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
-          {/* Protected Routes */}
-          <Route
-            path="/dashboard"
-            element={
+            {/* Protected Routes */}
+            <Route
+              path="/dashboard"
+              element={
                 <ProtectedRoute>
-                <Dashboard />
+                  <Dashboard />
                 </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/templates"
-            element={
+              }
+            />
+            <Route
+              path="/templates"
+              element={
                 <ProtectedRoute>
                   <Templates />
-                  </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/portfolio/:id"
-            element={
+                </ProtectedRoute>
+              }
+            />
+
+            {/* ✅ Static route for theme preview */}
+            <Route
+              path="/PublicPortfolio"
+              element={
                 <ProtectedRoute>
                   <PublicPortfolio />
                 </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/templates/modern"
-            element={
+              }
+            />
+
+            {/* Optional: Dynamic portfolio by user ID */}
+            <Route
+              path="/portfolio/:id"
+              element={
+                <ProtectedRoute>
+                  <PublicPortfolio />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/templates/modern"
+              element={
                 <ProtectedRoute>
                   <ModernTemplate />
                 </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/templates/minimal"
-            element={
-              <ProtectedRoute>
-              <ClassicTemplate />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </Router>
+              }
+            />
+            <Route
+              path="/templates/minimal"
+              element={
+                <ProtectedRoute>
+                  <ClassicTemplate />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </Router>
+      </UserProvider>
     </AuthProvider>
   );
 }
