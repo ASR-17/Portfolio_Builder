@@ -1,9 +1,9 @@
+// src/components/ThemeSelector.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ModernTemplate from "./templates/ModernTemplate";
 import ClassicTemplate from "./templates/ClassicTemplate";
 import { Button } from "@/components/ui/button";
-import PublicPortfolio from './../pages/PublicPortfolio';
 
 const templates = [
   {
@@ -16,7 +16,7 @@ const templates = [
   },
 ];
 
-const ThemeSelection = ({ onSubmitTheme }) => {
+const ThemeSelector = () => {
   const [selectedTheme, setSelectedTheme] = useState("");
   const navigate = useNavigate();
 
@@ -25,24 +25,19 @@ const ThemeSelection = ({ onSubmitTheme }) => {
   };
 
   const handleSubmit = () => {
-    if (!selectedTheme) return;
+  if (!selectedTheme) return;
 
-    // Save theme to localStorage
-    localStorage.setItem("selectedTheme", selectedTheme);
+  const data = localStorage.getItem("portfolioData");
+  if (!data || data === "undefined") {
+    alert("Portfolio data missing! Please submit details first.");
+    return;
+  }
 
-    // Notify parent (if passed)
-    if (onSubmitTheme) {
-      onSubmitTheme(selectedTheme);
-    }
+  localStorage.setItem("selectedTheme", selectedTheme);
+  navigate("/PublicPortfolio");
+};
 
-    // Navigate based on resume data
-    const resumeData = localStorage.getItem("resumeData");
-    if (resumeData) {
-      navigate("/portfolio/:id");
-    } else {
-      navigate("/dashboard");
-    }
-  };
+
 
   return (
     <div className="max-w-6xl mx-auto p-8">
@@ -88,4 +83,4 @@ const ThemeSelection = ({ onSubmitTheme }) => {
   );
 };
 
-export default ThemeSelection;
+export default ThemeSelector;

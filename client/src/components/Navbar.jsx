@@ -25,7 +25,7 @@ const menuItems = [
   },
   {
     label: "Portfolio",
-    to: "/portfolio",
+    to: "/PublicPortfolio",
   },
 ];
 

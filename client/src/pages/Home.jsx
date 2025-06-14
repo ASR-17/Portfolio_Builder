@@ -1,9 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // ✅ Step 1
 import Download from '../assets/Download.jpg';
 import OIP from '../assets/OIP.jpg';
 import OIP1 from '../assets/OIP1.jpg';
 
 const Home = () => {
+  const navigate = useNavigate(); // ✅ Step 2
+
+  const handleClick = () => {
+    navigate("/dashboard"); // ✅ Step 3
+  };
+
   return (
     <div className="bg-[light purple] min-h-screen flex flex-row justify-center items-center relative overflow-hidden">
       
@@ -22,30 +29,28 @@ const Home = () => {
           With a <span className="text-blue-600 underline">Resume</span>
         </h1>
         <p className="mt-4 text-lg text-gray-700">
-          Create an impressive resume in minute.
+          Create an impressive resume in minutes.
         </p>
-        <button className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-full text-base hover:bg-blue-700 transition-all duration-300">
+        <button 
+          onClick={handleClick}
+          className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-full text-base hover:bg-blue-700 transition-all duration-300"
+        >
           Click Here →
         </button>
       </div>
 
       {/* Resume Images Layout */}
       <div className="relative ml-16 w-full max-w-[500px] h-[300px] z-10">
-        {/* Left Image */}
         <img
           src={OIP}
           alt="Resume Left"
           className="absolute left-0 bottom-0 w-[180px] h-[260px] rounded-md shadow-lg transform -rotate-2 z-10"
         />
-        
-        {/* Right Image */}
         <img
           src={OIP1}
           alt="Resume Right"
           className="absolute right-0 bottom-0 w-[180px] h-[260px] rounded-md shadow-lg transform rotate-2 z-10"
         />
-        
-        {/* Center Image (on top) */}
         <img
           src={Download}
           alt="Resume Center"

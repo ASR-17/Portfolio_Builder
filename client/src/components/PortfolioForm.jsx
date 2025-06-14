@@ -50,9 +50,8 @@ export default function PortfolioForm({ onSubmit }) {
     };
     localStorage.setItem("portfolioData", JSON.stringify(completeData));
 
-    // ✅ Inform parent component (Dashboard) to show preview
     if (typeof onSubmit === "function") {
-      onSubmit();
+      onSubmit(completeData);
     }
   };
 
@@ -156,8 +155,17 @@ export default function PortfolioForm({ onSubmit }) {
           </div>
 
           <div className="flex gap-4">
-            <Button type="submit">Submit</Button>
-            <Button type="button" onClick={handleReset}>
+            <Button
+              type="submit"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold"
+            >
+              Select Theme
+            </Button>
+            <Button
+              type="button"
+              onClick={handleReset}
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold"
+            >
               Reset
             </Button>
           </div>

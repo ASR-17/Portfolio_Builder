@@ -46,14 +46,8 @@ function App() {
             />
 
             {/* ✅ Static route for theme preview */}
-            <Route
-              path="/PublicPortfolio"
-              element={
-                <ProtectedRoute>
-                  <PublicPortfolio />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/PublicPortfolio" element={<PublicPortfolio />} />
+
 
             {/* Optional: Dynamic portfolio by user ID */}
             <Route
